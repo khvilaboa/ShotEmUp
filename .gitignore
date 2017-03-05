@@ -9,6 +9,8 @@ Library/metadata
 *.unitypackage
 
 # Other folders
+[Ll]ibrary/
+[Tt]emp/
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
