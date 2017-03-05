@@ -2,11 +2,14 @@
 Library/metadata
 *.meta
 
-# Temporal
-Temp/
-
 # Visual Studio
 .vs/
 
 # Builds
 *.unitypackage
+
+# Other folders
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+Assets/AssetStoreTools*
