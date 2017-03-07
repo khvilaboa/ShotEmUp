@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
+
+    private const string TEXT_SCORE = "Score: ";
 
     [Header("Asteroids")]
     public GameObject asteroid;
@@ -12,12 +15,26 @@ public class GameController : MonoBehaviour {
     public float asteroidDelay;
     public float timeBetweenWaves;
 
+    [Header("UI")]
+    public Text txtScore;
+    private int score;
+
+    void Awake() {
+        score = 0;
+    }
+
     void Start () {
+        UpdateScore();
         StartCoroutine(GenerateAsteroids());
     }
-	
-	void Update () {
-		
+
+    public void AddScore(int valueToAdd) {
+        score += valueToAdd;
+        UpdateScore();
+    }
+
+    void UpdateScore () {
+        txtScore.text = TEXT_SCORE + score;
 	}
 
     // Coroutine to generate asteroid waves

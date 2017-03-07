@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class AsteroidMovement : MonoBehaviour {
 
+
     private Rigidbody body;
+    private const int SCORE_ASTEROID = 10;  // This should be dynamic in the future
+    private GameController gameController;  // To add points to the score when the asteroid is destroyed
+
+    [Header("Asteroid")]
     public float angularSpeedLimit;
     public GameObject explosion;
     public float asteroidMinSpeed;
@@ -17,6 +22,8 @@ public class AsteroidMovement : MonoBehaviour {
     }
 
 	void Start () {
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+
         // Random rotation
         body.angularVelocity = new Vector3(Random.Range(-angularSpeedLimit, angularSpeedLimit),
                                            Random.Range(-angularSpeedLimit, angularSpeedLimit),
@@ -35,6 +42,7 @@ public class AsteroidMovement : MonoBehaviour {
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(coll.gameObject);  // Shot
             Destroy(gameObject);  // Asteroid
+            gameController.AddScore(SCORE_ASTEROID);
         }
     }
 }
