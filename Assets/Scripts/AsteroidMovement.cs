@@ -40,6 +40,10 @@ public class AsteroidMovement : MonoBehaviour {
     void OnTriggerEnter(Collider coll) {
         if(coll.tag != "Boundary") {
             Instantiate(explosion, transform.position, transform.rotation);
+            if(coll.tag == "Player") {
+                Instantiate(explosion, coll.gameObject.transform.position, coll.gameObject.transform.rotation);
+                gameController.GameOver();
+            }
             Destroy(coll.gameObject);  // Shot
             Destroy(gameObject);  // Asteroid
             gameController.AddScore(SCORE_ASTEROID);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
@@ -17,15 +18,33 @@ public class GameController : MonoBehaviour {
 
     [Header("UI")]
     public Text txtScore;
+    public Text txtGameOver;
+    public Text txtRestart;
     private int score;
+    private bool gameOver;
 
     void Awake() {
         score = 0;
+        gameOver = false;
     }
 
     void Start () {
         UpdateScore();
+
+        // Hide game over texts
+        txtGameOver.gameObject.SetActive(false);
+        txtRestart.gameObject.SetActive(false);
+
+        // Start spawning asteroid waves
         StartCoroutine(GenerateAsteroids());
+    }
+
+    void Update() {
+        if(gameOver && Input.GetKey(KeyCode.R)) {
+            txtGameOver.gameObject.SetActive(false);
+            txtRestart.gameObject.SetActive(false);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void AddScore(int valueToAdd) {
@@ -51,6 +70,13 @@ public class GameController : MonoBehaviour {
                 yield return new WaitForSeconds(asteroidDelay);
             }
             yield return new WaitForSeconds(timeBetweenWaves);
+            if (gameOver) break;
         }
+    }
+
+    public void GameOver() {
+        txtGameOver.gameObject.SetActive(true);
+        txtRestart.gameObject.SetActive(true);
+        gameOver = true;
     }
 }
