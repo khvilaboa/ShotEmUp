@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour {
 
     void Start () {
         UpdateScore();
+        UpdateAsteroidLimit();
 
         // Hide game over texts
         txtGameOver.gameObject.SetActive(false);
@@ -55,6 +56,11 @@ public class GameController : MonoBehaviour {
     void UpdateScore () {
         txtScore.text = TEXT_SCORE + score;
 	}
+
+    void UpdateAsteroidLimit() {
+        Vector2 dims = Utils.GetViewDimensions();
+        asteriodRange.x = dims.x / 2 - 4;
+    }
 
     // Coroutine to generate asteroid waves
     IEnumerator GenerateAsteroids() {
