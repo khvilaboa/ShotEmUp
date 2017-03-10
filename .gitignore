@@ -1,7 +1,3 @@
-# Metadata
-Library/metadata
-*.meta
-
 # Visual Studio
 .vs/
 

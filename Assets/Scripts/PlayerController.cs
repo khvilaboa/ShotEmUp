@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour {
         nextFire = 0;
 	}
 
+    void Start() {
+        UpdatePlayerLimits();
+    }
+
     void Update()
     {
         if(turrets.childCount > 0 && Input.GetButton("Fire1") && Time.time >= nextFire)
@@ -60,6 +64,16 @@ public class PlayerController : MonoBehaviour {
         // Tilt the player when moving
         float currentTiltAngle = -(body.velocity.x / speed) * tiltAngle;
         body.rotation = Quaternion.Euler(0, 0, currentTiltAngle);
+    }
+
+    // Limits the area in which the player can move
+    void UpdatePlayerLimits() {
+        Vector2 viewSize = Utils.GetViewDimensions();
+        Debug.Log(viewSize);
+        minX = -viewSize.x / 2 + 8;
+        maxX = viewSize.x / 2 - 8;
+        minZ = 0;
+        maxZ = 3f * viewSize.y / 4;
     }
 
 }
