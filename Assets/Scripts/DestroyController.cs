@@ -8,6 +8,7 @@ public class DestroyController : MonoBehaviour {
 
     private GameController gameController;
     public GameObject explosion;
+    public int health = 100;
 
     void Awake() {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
@@ -19,12 +20,17 @@ public class DestroyController : MonoBehaviour {
         if (tag == "Enemy" && (coll.tag == "Enemy" || coll.tag == "EnemyShot")) return;
         if (tag == "Player" && coll.tag == "PlayerShot") return;
 
-        Instantiate(explosion, transform.position, transform.rotation);
-
-        if (tag == "Player") gameController.GameOver();
+        
 
         if (coll.tag == "PlayerShot" || coll.tag == "EnemyShot") Destroy(coll.gameObject);
+        Debug.Log("Fire");
 
-        Destroy(gameObject);
+        health -= 10;
+        if (health <= 0) {
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
+            
+            if (tag == "Player") gameController.GameOver();
+        }
     }
 }
