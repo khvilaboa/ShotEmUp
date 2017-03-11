@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
     void Start() {
-        UpdatePlayerLimits();
+        UpdateAreaLimits();
     }
 
     void Update()
@@ -67,9 +67,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Limits the area in which the player can move
-    void UpdatePlayerLimits() {
+    void UpdateAreaLimits() {
         Vector2 viewSize = Utils.GetViewDimensions();
-        Debug.Log(viewSize);
         minX = -viewSize.x / 2 + 8;
         maxX = viewSize.x / 2 - 8;
         minZ = 0;

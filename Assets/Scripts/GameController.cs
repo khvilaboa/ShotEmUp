@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour {
         txtRestart.gameObject.SetActive(false);
 
         // Start spawning asteroid waves
-        StartCoroutine(GenerateAsteroids());
+        //StartCoroutine(GenerateAsteroids());
     }
 
     void Update() {

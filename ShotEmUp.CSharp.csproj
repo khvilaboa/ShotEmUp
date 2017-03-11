@@ -78,9 +78,12 @@
     <Compile Include="Assets\Scripts\AsteroidMovement.cs" />
     <Compile Include="Assets\Scripts\AutoDestruct.cs" />
     <Compile Include="Assets\Scripts\BoundaryController.cs" />
+    <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\LinearMovement.cs" />
+    <Compile Include="Assets\Scripts\OndulantMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\ShotMovement.cs" />
+    <Compile Include="Assets\Scripts\ShotController.cs" />
     <Compile Include="Assets\Scripts\Utils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
