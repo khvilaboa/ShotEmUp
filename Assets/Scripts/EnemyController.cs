@@ -7,7 +7,6 @@ public class EnemyController : MonoBehaviour {
     public ShotController shotController;
     public float fireRate;
     private float nextFire;
-    private float minX, maxX;    
 
     void Start () {
         shotController = GetComponent<ShotController>();

@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\AsteroidMovement.cs" />
     <Compile Include="Assets\Scripts\AutoDestruct.cs" />
     <Compile Include="Assets\Scripts\BoundaryController.cs" />
+    <Compile Include="Assets\Scripts\DestroyController.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\LinearMovement.cs" />
