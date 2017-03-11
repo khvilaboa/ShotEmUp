@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
     private const string TEXT_SCORE = "Score: ";
 
     [Header("Asteroids")]
-    public GameObject asteroid;
+    public GameObject[] asteroids;
     public Vector3 asteriodRange;
     public int minAsteroidsPerWave;
     public int maxAsteroidsPerWave;
@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour {
             {
                 float xPosition = Random.Range(-asteriodRange.x, asteriodRange.x);
                 Vector3 asteroidPosition = new Vector3(xPosition, asteriodRange.y, asteriodRange.z);
-                Instantiate(asteroid, asteroidPosition, Quaternion.identity);
+                Instantiate(asteroids[Random.Range(0, asteroids.Length)], asteroidPosition, Quaternion.identity);
                 yield return new WaitForSeconds(asteroidDelay);
             }
             yield return new WaitForSeconds(timeBetweenWaves);
