@@ -36,6 +36,8 @@ public class DestroyController : MonoBehaviour {
         Debug.Log(coll.name);
 
         health -= 10;
+        if (tag == "Player") gameController.UpdateHealth((float) health / fullHealth);
+
         if (health <= 0) {
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
@@ -47,9 +49,6 @@ public class DestroyController : MonoBehaviour {
             healthMarker.GetChild(0).position -= new Vector3(step, 0, 0);
             healthMarker.GetChild(1).localScale += new Vector3(0, step, 0);
             healthMarker.GetChild(1).position -= new Vector3(step, 0, 0);
-            //healthMarker.GetChild(0).localScale = new Vector3(scale0.x, scale0.y, healthMarkerLength * ((float)health / fullHealth));
-            //Vector3 scale1 = healthMarker.GetChild(1).localScale;
-            //healthMarker.GetChild(1).localScale -= new Vector3(scale1.x, scale1.y, healthMarkerLength - healthMarkerLength * ((float)health / fullHealth));
         }
     }
 }

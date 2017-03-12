@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour {
     public Text txtRestart;
     private int score;
     private bool gameOver;
+    public Transform healthMarker;
 
     void Awake() {
         score = 0;
@@ -35,7 +36,7 @@ public class GameController : MonoBehaviour {
         // Hide game over texts
         txtGameOver.gameObject.SetActive(false);
         txtRestart.gameObject.SetActive(false);
-
+        
         // Start spawning asteroid waves
         //StartCoroutine(GenerateAsteroids());
     }
@@ -84,5 +85,20 @@ public class GameController : MonoBehaviour {
         txtGameOver.gameObject.SetActive(true);
         txtRestart.gameObject.SetActive(true);
         gameOver = true;
+    }
+
+    public void UpdateHealth(float healthPercentage) {
+        // Modify the green bar length
+        Vector3 greenHealth = healthMarker.GetChild(0).localScale;
+        healthMarker.GetChild(0).localScale = new Vector3(healthPercentage, greenHealth.y, greenHealth.z);
+
+        // Modify the red bar length
+        Vector3 redHealth = healthMarker.GetChild(1).localScale;
+        healthMarker.GetChild(1).localScale = new Vector3(1 - healthPercentage, greenHealth.y, greenHealth.z);
+
+        // Modifify the red bar position
+        RectTransform redTransform = healthMarker.GetChild(1).GetComponent<RectTransform>();
+        float redWidth = redTransform.sizeDelta.x;
+        redTransform.anchoredPosition = new Vector3(redWidth * healthPercentage, redTransform.anchoredPosition.y);
     }
 }
