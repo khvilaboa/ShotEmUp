@@ -30,7 +30,7 @@ public class DestroyController : MonoBehaviour {
     {
         if (coll.tag == "Boundary") return;
         if (tag == "Enemy" && (coll.tag == "Enemy" || coll.tag == "EnemyShot")) return;
-        if (tag == "Player" && coll.tag == "PlayerShot") return;        
+        if (tag == "Player" && coll.tag == "PlayerShot") return;
 
         if (coll.tag == "PlayerShot" || coll.tag == "EnemyShot") Destroy(coll.gameObject);
         Debug.Log(coll.name);
@@ -38,11 +38,12 @@ public class DestroyController : MonoBehaviour {
         health -= 10;
         if (tag == "Player") gameController.UpdateHealth((float) health / fullHealth);
 
-        if (health <= 0) {
+        if (health == 0) {
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
-            
+
             if (tag == "Player") gameController.GameOver();
+            else { gameController.EnemyDead(); Debug.Log("coll: " + this); }
         } else if (healthMarker != null) {
             float step = healthMarkerLength * (10f / fullHealth);
             healthMarker.GetChild(0).localScale -= new Vector3(0, step, 0);

@@ -6,7 +6,7 @@ public class LinearMovement : MonoBehaviour {
 
     private Rigidbody body;
     public Vector3 direction;
-    //public float speed;
+    public float yLimit;
 
 	void Start () {
         body = GetComponent<Rigidbody>();
