@@ -7,7 +7,7 @@ public class OndulantMovement : MonoBehaviour {
     private Rigidbody body;
     private float minX, maxX;
     public float speed = 40;
-    public float tiltAngle = 90;  // Max tilt
+    public float tiltAngle = 10;  // Max tilt
     private float currentTilt = 0;
     private bool rightDirection = true;
 
