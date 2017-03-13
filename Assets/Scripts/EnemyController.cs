@@ -6,11 +6,12 @@ public class EnemyController : MonoBehaviour {
 
     public ShotController shotController;
     public float fireRate;
+    public float initialWait = 2;
     private float nextFire;
 
     void Start () {
         shotController = GetComponent<ShotController>();
-        nextFire = 0;
+        nextFire = Time.time + initialWait;
     }
 
     void Update()
