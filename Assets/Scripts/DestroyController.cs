@@ -43,7 +43,7 @@ public class DestroyController : MonoBehaviour {
             Destroy(gameObject);
 
             if (tag == "Player") gameController.GameOver();
-            else { gameController.EnemyDead(); Debug.Log("coll: " + this); }
+            else { gameController.EnemyDead(name, true); Debug.Log("dead: " + this); }
         } else if (healthMarker != null) {
             float step = healthMarkerLength * (10f / fullHealth);
             healthMarker.GetChild(0).localScale -= new Vector3(0, step, 0);

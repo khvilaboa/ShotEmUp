@@ -9,6 +9,12 @@ public class GameController : MonoBehaviour
 
     private const string TEXT_SCORE = "Score: ";
 
+    private const string ENEMY_ASTEROID = "asteroid";
+    private const string ENEMY_WARSHIP = "warship";
+
+    private const int ENEMY_ASTEROID_SCORE = 10;
+    private const int ENEMY_WARSHIP_SCORE = 50;
+
     private enum WaveType { Asteroid, Warship };
 
     [Header("Asteroids")]
@@ -103,11 +109,19 @@ public class GameController : MonoBehaviour
         redTransform.anchoredPosition = new Vector3(redWidth * healthPercentage, redTransform.anchoredPosition.y);
     }
 
-    public void EnemyDead() {
+    public void EnemyDead(string enemyClass, bool destroyedByPlayer) {
         enemiesLeft -= 1;
         Debug.Log("enemies left: " + enemiesLeft);
 
-        if(enemiesLeft == 0) {
+        if(destroyedByPlayer) {
+            if (enemyClass.StartsWith(ENEMY_WARSHIP))
+                AddScore(ENEMY_WARSHIP_SCORE);
+            else if (enemyClass.StartsWith(ENEMY_ASTEROID))
+                AddScore(ENEMY_ASTEROID_SCORE);
+        }
+        
+
+        if (enemiesLeft == 0) {
             LaunchWave();
         }
     }

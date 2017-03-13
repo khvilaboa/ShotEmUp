@@ -13,7 +13,7 @@ public class BoundaryController : MonoBehaviour {
     void OnTriggerExit(Collider coll)
     {
         Destroy(coll.gameObject);
-        if (coll.tag != "EnemyShot" && coll.tag != "PlayerShot") gameController.EnemyDead();
+        if (coll.tag != "EnemyShot" && coll.tag != "PlayerShot") gameController.EnemyDead(coll.name, false);
         Debug.Log("Exit:" + coll);
     }
 }
