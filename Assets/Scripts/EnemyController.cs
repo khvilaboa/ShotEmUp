@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour {
     {
         if (Time.time >= nextFire)
         {
-            bool burstShot = Random.Range(0, 10) < 9;  // 90%
+            bool burstShot = Random.Range(0, 10) < 8;  // 80%
             if (burstShot)
             {
                 shotController.Burst(fireRate);

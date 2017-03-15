@@ -6,9 +6,8 @@ public class LinearMovement : MonoBehaviour {
 
     private Rigidbody body;
     public Vector3 direction;
-    public float yLimit;
 
-	void Start () {
+    void Start () {
         body = GetComponent<Rigidbody>();
         body.velocity = direction;
 	}

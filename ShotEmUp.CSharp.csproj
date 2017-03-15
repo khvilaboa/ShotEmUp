@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\DestroyController.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\InconstantMovement.cs" />
     <Compile Include="Assets\Scripts\LinearMovement.cs" />
     <Compile Include="Assets\Scripts\OndulantMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
