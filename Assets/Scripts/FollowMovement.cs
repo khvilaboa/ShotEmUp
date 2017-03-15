@@ -8,7 +8,9 @@ public class FollowMovement : MonoBehaviour {
     public GameObject target;
     public float maxSpeed;
     public float tiltAngle;
+    public bool zLimited = true;
     public float zLimit;
+    
 
     void Awake() {
         body = GetComponent<Rigidbody>();
@@ -16,11 +18,11 @@ public class FollowMovement : MonoBehaviour {
 
     void Start()
     {
-        body.velocity = new Vector3(body.velocity.x, body.velocity.y, -maxSpeed);
+        if(zLimited) body.velocity = new Vector3(body.velocity.x, body.velocity.y, -maxSpeed);
     }
 
     void Update () {
-        if (body.position.z <= zLimit) body.velocity = new Vector3(body.velocity.x, body.velocity.y, 0);
+        if (zLimited && body.position.z <= zLimit) body.velocity = new Vector3(body.velocity.x, body.velocity.y, 0);
 
         if(target != null) {
             float diff = target.transform.position.x - transform.position.x;

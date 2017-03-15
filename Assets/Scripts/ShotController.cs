@@ -14,7 +14,7 @@ public class ShotController : MonoBehaviour {
         nextTurret = 0;
 	}
 	
-	public void Fire () {
+	public void FireAll () {
         if (turrets.childCount > 0) {
             if (alternateTurrets)
             {
@@ -27,6 +27,12 @@ public class ShotController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public void Fire(int numTurret)
+    {
+        numTurret = Mathf.Clamp(numTurret, 0, turrets.childCount);
+        Instantiate(shot, turrets.GetChild(numTurret).position, shot.transform.rotation);
     }
 
     public void Burst(float duration, bool inverse = false) {

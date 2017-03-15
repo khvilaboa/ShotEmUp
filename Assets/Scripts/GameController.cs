@@ -145,6 +145,7 @@ public class GameController : MonoBehaviour
             GameObject enemyInst = Instantiate(enemy, position, Quaternion.identity);
             if(enemyInst.name.StartsWith(ENEMY_WARSHIP_GREY)) {
                 enemyInst.GetComponent<FollowMovement>().target = player;
+                enemyInst.GetComponent<ShotController>().shot.GetComponent<FollowMovement>().target = player;
             }
         }
         

@@ -25,7 +25,7 @@ public class BlackWarshipController : MonoBehaviour {
                 nextFire = Time.time + 2 * fireRate;  // Burst duration + fireRate
             }
             else {
-                shotController.Fire();
+                shotController.FireAll();
                 nextFire = Time.time + fireRate;
             }
         }
