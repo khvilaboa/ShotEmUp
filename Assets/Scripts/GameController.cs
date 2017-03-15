@@ -10,10 +10,12 @@ public class GameController : MonoBehaviour
     private const string TEXT_SCORE = "Score: ";
 
     private const string ENEMY_ASTEROID = "asteroid";
-    private const string ENEMY_WARSHIP = "warship";
+    private const string ENEMY_WARSHIP_BLACK = "warshipBlack";
+    private const string ENEMY_WARSHIP_GREY = "warshipGrey";
 
     private const int ENEMY_ASTEROID_SCORE = 10;
-    private const int ENEMY_WARSHIP_SCORE = 50;
+    private const int ENEMY_WARSHIP_BLACK_SCORE = 50;
+    private const int ENEMY_WARSHIP_GREY_SCORE = 50;
 
     private enum WaveType { Asteroid, Warship };
 
@@ -26,16 +28,19 @@ public class GameController : MonoBehaviour
     public float timeBetweenWaves;
 
     [Header("Enemies")]
-    public GameObject warship;
+    public GameObject[] warships;
 
     [Header("UI")]
     public Text txtScore;
     public Text txtGameOver;
     public Text txtRestart;
-    private int score;
-    private bool gameOver;
     public Transform healthMarker;
 
+    [Header("Other")]
+    public GameObject player;
+
+    private int score;
+    private bool gameOver;
     private int enemiesLeft = 0;
 
     void Awake()
@@ -114,8 +119,10 @@ public class GameController : MonoBehaviour
         Debug.Log("enemies left: " + enemiesLeft);
 
         if(destroyedByPlayer) {
-            if (enemyClass.StartsWith(ENEMY_WARSHIP))
-                AddScore(ENEMY_WARSHIP_SCORE);
+            if (enemyClass.StartsWith(ENEMY_WARSHIP_BLACK))
+                AddScore(ENEMY_WARSHIP_BLACK_SCORE);
+            else if (enemyClass.StartsWith(ENEMY_WARSHIP_GREY))
+                AddScore(ENEMY_WARSHIP_GREY_SCORE);
             else if (enemyClass.StartsWith(ENEMY_ASTEROID))
                 AddScore(ENEMY_ASTEROID_SCORE);
         }
@@ -128,13 +135,17 @@ public class GameController : MonoBehaviour
 
     public void LaunchWave() {
         int rnd = Random.Range(1, 10);
-        if(rnd < 5) {
+        if(rnd < 1) {
             StartCoroutine(GenerateAsteroids());
         } else {
             enemiesLeft = 1;
             float xPosition = Random.Range(-asteriodRange.x, asteriodRange.x);
             Vector3 position = new Vector3(xPosition, asteriodRange.y, 100);
-            Instantiate(warship, position, Quaternion.identity);
+            GameObject enemy = warships[Random.Range(0,warships.Length)];
+            GameObject enemyInst = Instantiate(enemy, position, Quaternion.identity);
+            if(enemyInst.name.StartsWith(ENEMY_WARSHIP_GREY)) {
+                enemyInst.GetComponent<FollowMovement>().target = player;
+            }
         }
         
     }

@@ -48,7 +48,7 @@ public class OndulantMovement : MonoBehaviour {
 
     void UpdateAreaLimits() {
         Vector2 viewSize = Utils.GetViewDimensions();
-        minX = -viewSize.x / 2 + 12;
+        minX = -viewSize.x / 2 + 12;  // TODO: make margin dynamic
         maxX = viewSize.x / 2 - 12;
     }
 }
