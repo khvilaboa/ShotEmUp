@@ -10,12 +10,19 @@ public class GameController : MonoBehaviour
     private const string TEXT_SCORE = "Score: ";
 
     private const string ENEMY_ASTEROID = "asteroid";
-    private const string ENEMY_WARSHIP_BLACK = "warshipBlack";
-    private const string ENEMY_WARSHIP_GREY = "warshipGrey";
-
     private const int ENEMY_ASTEROID_SCORE = 10;
+    private const int ENEMY_ASTEROID_DAMAGE = 20;
+
+    private const string ENEMY_WARSHIP_BLACK = "warshipBlack";
     private const int ENEMY_WARSHIP_BLACK_SCORE = 50;
+    private const int ENEMY_WARSHIP_BLACK_DAMAGE = 50;
+
+    private const string ENEMY_WARSHIP_GREY = "warshipGrey";
     private const int ENEMY_WARSHIP_GREY_SCORE = 50;
+    private const int ENEMY_WARSHIP_GREY_DAMAGE = 50;
+
+    private const string SHOT = "shot";
+    private const int SHOT_DAMAGE = 10;
 
     private enum WaveType { Asteroid, Warship };
 
@@ -128,14 +135,14 @@ public class GameController : MonoBehaviour
         }
         
 
-        if (enemiesLeft == 0) {
+        if (enemiesLeft == 0 && !gameOver) {
             LaunchWave();
         }
     }
 
     public void LaunchWave() {
         int rnd = Random.Range(1, 10);
-        if(rnd < 1) {
+        if(rnd < 8) {
             StartCoroutine(GenerateAsteroids());
         } else {
             enemiesLeft = 1;
@@ -162,5 +169,18 @@ public class GameController : MonoBehaviour
             Instantiate(asteroids[Random.Range(0, asteroids.Length)], asteroidPosition, Quaternion.identity);
             yield return new WaitForSeconds(asteroidDelay);
         }
+    }
+
+    public int getDamageOf(string name) {
+        if (name.StartsWith(ENEMY_WARSHIP_BLACK))
+            return ENEMY_WARSHIP_BLACK_DAMAGE;
+        else if (name.StartsWith(ENEMY_WARSHIP_GREY))
+            return ENEMY_WARSHIP_GREY_DAMAGE;
+        else if (name.StartsWith(ENEMY_ASTEROID))
+            return ENEMY_ASTEROID_DAMAGE;
+        else if (name.StartsWith(SHOT))
+            return SHOT_DAMAGE;
+
+        return 0;
     }
 }

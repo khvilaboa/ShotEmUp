@@ -13,10 +13,12 @@ public class DestroyController : MonoBehaviour {
     private float healthMarkerLength;
     private float healthMarkerInitialPos;
     private int fullHealth;
+    private bool destroyed;
 
     void Awake() {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         fullHealth = health;
+        destroyed = false;
     }
 
     void Start() {
@@ -33,17 +35,17 @@ public class DestroyController : MonoBehaviour {
         if (tag == "Player" && coll.tag == "PlayerShot") return;
 
         if (coll.tag == "PlayerShot" || coll.tag == "EnemyShot") Destroy(coll.gameObject);
-        Debug.Log(coll.name);
 
-        health -= 10;
+        health = Mathf.Max(health - gameController.getDamageOf(coll.name), 0);
         if (tag == "Player") gameController.UpdateHealth((float) health / fullHealth);
 
-        if (health == 0) {
-            Instantiate(explosion, transform.position, transform.rotation);
+        if (!destroyed && (health <= 0 || (tag == "Enemy" && coll.tag == "Player"))) {
+            destroyed = true;
+            if (explosion != null) Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
 
             if (tag == "Player") gameController.GameOver();
-            else { gameController.EnemyDead(name, true); Debug.Log("dead: " + this); }
+            else gameController.EnemyDead(name, true);
         } else if (healthMarker != null) {
             float step = healthMarkerLength * (10f / fullHealth);
             healthMarker.GetChild(0).localScale -= new Vector3(0, step, 0);
