@@ -9,20 +9,23 @@ public class GameController : MonoBehaviour
 
     private const string TEXT_SCORE = "Score: ";
 
-    private const string ENEMY_ASTEROID = "asteroid";
+    public const string ENEMY_ASTEROID = "asteroid";
     private const int ENEMY_ASTEROID_SCORE = 10;
     private const int ENEMY_ASTEROID_DAMAGE = 20;
 
-    private const string ENEMY_WARSHIP_BLACK = "warshipBlack";
+    public const string ENEMY_WARSHIP_BLACK = "warshipBlack";
     private const int ENEMY_WARSHIP_BLACK_SCORE = 50;
     private const int ENEMY_WARSHIP_BLACK_DAMAGE = 50;
 
-    private const string ENEMY_WARSHIP_GREY = "warshipGrey";
+    public const string ENEMY_WARSHIP_GREY = "warshipGrey";
     private const int ENEMY_WARSHIP_GREY_SCORE = 50;
     private const int ENEMY_WARSHIP_GREY_DAMAGE = 50;
 
-    private const string SHOT = "shot";
+    public const string SHOT = "shot";
     private const int SHOT_DAMAGE = 10;
+
+    public const string ITEM_LIFE = "itemLife";
+    public const int ITEM_LIFE_POINTS = 25;
 
     private enum WaveType { Asteroid, Warship };
 
@@ -140,7 +143,7 @@ public class GameController : MonoBehaviour
                 if (enemyClass.StartsWith(ENEMY_ASTEROID))
                     AddScore(ENEMY_ASTEROID_SCORE);
 
-                if(Random.Range(0, 100) < itemSpawnProbability * 100)
+                //if(Random.Range(0, 100) < itemSpawnProbability * 100)
                     spawnRandomItem(enemy.transform.position);
             }
         }
@@ -198,5 +201,9 @@ public class GameController : MonoBehaviour
     public void spawnRandomItem(Vector3 position) {
         GameObject item = Instantiate(oneTimeItems[Random.Range(0, oneTimeItems.Length)], position, Quaternion.identity);
         item.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, itemAngularVelocity ,0);
+    }
+
+    public void activateItem(Collider coll) {
+        if (coll.name.StartsWith(ITEM_LIFE)) return;  // Future use
     }
 }

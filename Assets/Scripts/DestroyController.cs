@@ -34,6 +34,14 @@ public class DestroyController : MonoBehaviour {
         if (tag == "Enemy" && (coll.tag == "Enemy" || coll.tag == "EnemyShot")) return;
         if (tag == "Player" && coll.tag == "PlayerShot") return;
 
+        if (tag == "Player" && coll.tag == "Item") {
+            if (coll.name.StartsWith(GameController.ITEM_LIFE)) {
+                health = Mathf.Min(health + GameController.ITEM_LIFE_POINTS, fullHealth);
+                gameController.UpdateHealth((float) health / fullHealth);
+            }
+            return;
+        }
+
         if (coll.tag == "PlayerShot" || coll.tag == "EnemyShot") Destroy(coll.gameObject);
 
         health = Mathf.Max(health - gameController.getDamageOf(coll.name), 0);
