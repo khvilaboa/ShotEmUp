@@ -37,6 +37,11 @@ public class GameController : MonoBehaviour
     [Header("Enemies")]
     public GameObject[] warships;
 
+    [Header("Objects")]
+    public GameObject[] oneTimeItems;
+    public float itemSpawnProbability = 0.5f;
+    public float itemAngularVelocity = 30;
+
     [Header("UI")]
     public Text txtScore;
     public Text txtGameOver;
@@ -121,8 +126,9 @@ public class GameController : MonoBehaviour
         redTransform.anchoredPosition = new Vector3(redWidth * healthPercentage, redTransform.anchoredPosition.y);
     }
 
-    public void EnemyDead(string enemyClass, bool destroyedByPlayer) {
+    public void EnemyDead(GameObject enemy, bool destroyedByPlayer) {
         enemiesLeft -= 1;
+        string enemyClass = enemy.name;
         Debug.Log("enemies left: " + enemiesLeft);
 
         if(destroyedByPlayer) {
@@ -130,8 +136,13 @@ public class GameController : MonoBehaviour
                 AddScore(ENEMY_WARSHIP_BLACK_SCORE);
             else if (enemyClass.StartsWith(ENEMY_WARSHIP_GREY))
                 AddScore(ENEMY_WARSHIP_GREY_SCORE);
-            else if (enemyClass.StartsWith(ENEMY_ASTEROID))
-                AddScore(ENEMY_ASTEROID_SCORE);
+            else {  // Normal enemies (with probability of dropping items)
+                if (enemyClass.StartsWith(ENEMY_ASTEROID))
+                    AddScore(ENEMY_ASTEROID_SCORE);
+
+                if(Random.Range(0, 100) < itemSpawnProbability * 100)
+                    spawnRandomItem(enemy.transform.position);
+            }
         }
         
 
@@ -182,5 +193,10 @@ public class GameController : MonoBehaviour
             return SHOT_DAMAGE;
 
         return 0;
+    }
+
+    public void spawnRandomItem(Vector3 position) {
+        GameObject item = Instantiate(oneTimeItems[Random.Range(0, oneTimeItems.Length)], position, Quaternion.identity);
+        item.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, itemAngularVelocity ,0);
     }
 }
