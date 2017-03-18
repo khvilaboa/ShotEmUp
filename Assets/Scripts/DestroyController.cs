@@ -38,7 +38,11 @@ public class DestroyController : MonoBehaviour {
             if (coll.name.StartsWith(GameController.ITEM_LIFE)) {
                 health = Mathf.Min(health + GameController.ITEM_LIFE_POINTS, fullHealth);
                 gameController.UpdateHealth((float) health / fullHealth);
+            } else {
+                gameController.activateItem(coll);
             }
+            
+            Destroy(coll.gameObject);
             return;
         }
 
