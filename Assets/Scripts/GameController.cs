@@ -28,10 +28,14 @@ public class GameController : MonoBehaviour
     public const int ITEM_LIFE_POINTS = 25;
 
     public const string ITEM_SHOT_SPEED = "itemShotSpeed";
-    public const int ITEM_SHOT_SPEED_DURATION = 10;
-    public const float ITEM_SHOT_SPEED_MULT = 1.5f;
-    public const int ITEM_SHOT_SPEED_ACUM = 3;  // Number of items of this type that can be accumulated
+    private const int ITEM_SHOT_SPEED_DURATION = 10;
+    private const float ITEM_SHOT_SPEED_MULT = 1.5f;
+    private const int ITEM_SHOT_SPEED_ACUM = 3;  // Number of items of this type that can be accumulated
     private int shotSpeedCount = 0;  // Number of shot speed items currently activated
+
+    public const string ITEM_BUDDY = "itemBuddy";
+    public const int ITEM_BUDDY_HEALTH = 25;
+    public GameObject buddyReference;
 
     //private enum WaveType { Asteroid, Warship };
 
@@ -49,7 +53,7 @@ public class GameController : MonoBehaviour
     [Header("Objects")]
     public GameObject[] oneTimeItems;
     public float itemSpawnProbability = 0.5f;
-    public float itemAngularVelocity = 30;
+    public float itemAngularVelocity = 20;
 
     [Header("UI")]
     public Text txtScore;
@@ -68,6 +72,7 @@ public class GameController : MonoBehaviour
     {
         score = 0;
         gameOver = false;
+        buddyReference = null;
     }
 
     void Start()
@@ -212,6 +217,8 @@ public class GameController : MonoBehaviour
     public void activateItem(Collider coll) {
         if (coll.name.StartsWith(ITEM_SHOT_SPEED))
             StartCoroutine(activateShotSpeedIncrement());  // Future use
+        else if (coll.name.StartsWith(ITEM_BUDDY))
+            activateBuddy();
     }
 
     private IEnumerator activateShotSpeedIncrement() {
@@ -222,6 +229,21 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(ITEM_SHOT_SPEED_DURATION);
             player.GetComponent<PlayerController>().fireRate *= ITEM_SHOT_SPEED_MULT;
             shotSpeedCount -= 1;
+        }
+    }
+
+    private void activateBuddy()
+    {
+        if (buddyReference == null)
+        {
+            buddyReference = Instantiate(player, player.transform.position + (new Vector3(0,0,50)), Quaternion.identity);
+            buddyReference.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            Destroy(buddyReference.GetComponent<PlayerController>());
+            BuddyController buddyController = buddyReference.AddComponent<BuddyController>();
+            buddyController.shotController = buddyReference.GetComponent<ShotController>();
+            buddyController.GetComponent<DestroyController>().health = ITEM_BUDDY_HEALTH;
+            OrbitantMovement orbitantMovement = buddyReference.AddComponent<OrbitantMovement>();
+            orbitantMovement.center = player.transform;
         }
     }
 }

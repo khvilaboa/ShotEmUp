@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\AutoDestruct.cs" />
     <Compile Include="Assets\Scripts\BlackWarshipController.cs" />
     <Compile Include="Assets\Scripts\BoundaryController.cs" />
+    <Compile Include="Assets\Scripts\BuddyController.cs" />
     <Compile Include="Assets\Scripts\DestroyController.cs" />
     <Compile Include="Assets\Scripts\FollowMovement.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Assets\Scripts\InconstantMovement.cs" />
     <Compile Include="Assets\Scripts\LinearMovement.cs" />
     <Compile Include="Assets\Scripts\OndulantMovement.cs" />
+    <Compile Include="Assets\Scripts\OrbitantMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ShotController.cs" />
     <Compile Include="Assets\Scripts\Utils.cs" />

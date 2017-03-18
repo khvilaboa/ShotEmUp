@@ -49,15 +49,16 @@ public class DestroyController : MonoBehaviour {
         if (coll.tag == "PlayerShot" || coll.tag == "EnemyShot") Destroy(coll.gameObject);
 
         health = Mathf.Max(health - gameController.getDamageOf(coll.name), 0);
-        if (tag == "Player") gameController.UpdateHealth((float) health / fullHealth);
+        if (tag == "Player" && GetComponent<PlayerController>() != null)
+            gameController.UpdateHealth((float) health / fullHealth);
 
         if (!destroyed && (health <= 0 || (tag == "Enemy" && coll.tag == "Player"))) {
             destroyed = true;
             if (explosion != null) Instantiate(explosion, transform.position, transform.rotation);
             
-            if (tag == "Player") {
+            if (tag == "Player" && GetComponent<PlayerController>() != null) {
                 gameController.GameOver();
-            } else {
+            } else if (tag != "Player") {
                 gameController.EnemyDead(gameObject, true);
             }
 

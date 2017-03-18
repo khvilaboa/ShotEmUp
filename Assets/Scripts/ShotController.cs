@@ -14,7 +14,7 @@ public class ShotController : MonoBehaviour {
         nextTurret = 0;
 	}
 	
-	public void FireAll () {
+	public void Fire () {
         if (turrets.childCount > 0) {
             if (alternateTurrets)
             {
@@ -28,6 +28,7 @@ public class ShotController : MonoBehaviour {
             }
         }
     }
+
 
     public void Fire(int numTurret)
     {

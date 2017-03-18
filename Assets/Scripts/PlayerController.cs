@@ -11,13 +11,8 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody body;
 
     [Header("Shooting")]
-    public GameObject shot;  // PreFab
-    //public Transform leftTurret;
-    //public Transform rightTurret;
-    public Transform turrets;
+    public ShotController shotController;
     public float fireRate;  // In seconds
-    public bool alternateTurrets;
-    private int nextTurret;  // Used when alternate is active
     private float nextFire;
     
 
@@ -32,17 +27,9 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-        if(turrets.childCount > 0 && Input.GetButton("Fire1") && Time.time >= nextFire)
+        if(Input.GetButton("Fire1") && Time.time >= nextFire)
         {
-            if(alternateTurrets) {
-                Instantiate(shot, turrets.GetChild(nextTurret).position, shot.transform.rotation);
-                nextTurret = (nextTurret + 1) % turrets.childCount;
-            } else {
-                for (int i = 0; i < turrets.childCount; i++) {
-                    Instantiate(shot, turrets.GetChild(i).position, shot.transform.rotation);
-                }
-            }
-            
+            shotController.Fire();
             nextFire = Time.time + fireRate;
         }
     }
