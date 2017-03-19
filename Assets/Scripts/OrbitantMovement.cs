@@ -9,6 +9,7 @@ public class OrbitantMovement : MonoBehaviour {
     public float radius = 15;
     public float radiusSpeed = 0.5f;
     public float rotationSpeed = 40;
+    public DestroyController destroyController;
     private Vector3 lastCenter;
 
     void Start()
@@ -19,9 +20,17 @@ public class OrbitantMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
-        transform.position += (center.position - lastCenter);
-        transform.RotateAround(center.position, Vector3.up, rotationSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.identity;
-        lastCenter = center.position;
+        if(center != null)
+        {
+            transform.position += (center.position - lastCenter);
+            transform.RotateAround(center.position, Vector3.up, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.identity;
+            lastCenter = center.position;
+        }
+        else if(destroyController != null)
+        {
+            destroyController.Destroy();
+        }
+        
     }
 }

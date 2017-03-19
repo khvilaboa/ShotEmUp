@@ -240,10 +240,16 @@ public class GameController : MonoBehaviour
             buddyReference.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             Destroy(buddyReference.GetComponent<PlayerController>());
             BuddyController buddyController = buddyReference.AddComponent<BuddyController>();
-            buddyController.shotController = buddyReference.GetComponent<ShotController>();
+
+            ShotController shotController = buddyReference.GetComponent<ShotController>();
+            buddyController.shotController = shotController;
+            shotController.shot.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+
             buddyController.GetComponent<DestroyController>().health = ITEM_BUDDY_HEALTH;
+
             OrbitantMovement orbitantMovement = buddyReference.AddComponent<OrbitantMovement>();
             orbitantMovement.center = player.transform;
+            orbitantMovement.destroyController = buddyReference.GetComponent<DestroyController>();
         }
     }
 }

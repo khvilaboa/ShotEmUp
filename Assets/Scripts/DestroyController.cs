@@ -53,16 +53,7 @@ public class DestroyController : MonoBehaviour {
             gameController.UpdateHealth((float) health / fullHealth);
 
         if (!destroyed && (health <= 0 || (tag == "Enemy" && coll.tag == "Player"))) {
-            destroyed = true;
-            if (explosion != null) Instantiate(explosion, transform.position, transform.rotation);
-            
-            if (tag == "Player" && GetComponent<PlayerController>() != null) {
-                gameController.GameOver();
-            } else if (tag != "Player") {
-                gameController.EnemyDead(gameObject, true);
-            }
-
-            Destroy(gameObject);
+            Destroy();
         } else if (healthMarker != null) {
             float step = healthMarkerLength * (10f / fullHealth);
             healthMarker.GetChild(0).localScale -= new Vector3(0, step, 0);
@@ -71,4 +62,22 @@ public class DestroyController : MonoBehaviour {
             healthMarker.GetChild(1).position -= new Vector3(step, 0, 0);
         }
     }
+
+    public void Destroy()
+    {
+        destroyed = true;
+        if (explosion != null) Instantiate(explosion, transform.position, transform.rotation);
+
+        if (tag == "Player" && GetComponent<PlayerController>() != null)
+        {
+            gameController.GameOver();
+        }
+        else if (tag != "Player")
+        {
+            gameController.EnemyDead(gameObject, true);
+        }
+
+        Destroy(gameObject);
+    }
 }
+
