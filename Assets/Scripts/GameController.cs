@@ -243,7 +243,7 @@ public class GameController : MonoBehaviour
 
             ShotController shotController = buddyReference.GetComponent<ShotController>();
             buddyController.shotController = shotController;
-            shotController.shot.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            //shotController.shot.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
 
             buddyController.GetComponent<DestroyController>().health = ITEM_BUDDY_HEALTH;
 

@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\GreyWarshipController.cs" />
     <Compile Include="Assets\Scripts\InconstantMovement.cs" />
     <Compile Include="Assets\Scripts\LinearMovement.cs" />
+    <Compile Include="Assets\Scripts\MeanderingMovement.cs" />
     <Compile Include="Assets\Scripts\OndulantMovement.cs" />
     <Compile Include="Assets\Scripts\OrbitantMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />

@@ -11,7 +11,6 @@ public class DestroyController : MonoBehaviour {
     public int health = 100;
     public Transform healthMarker;
     private float healthMarkerLength;
-    private float healthMarkerInitialPos;
     private int fullHealth;
     private bool destroyed;
 
@@ -24,7 +23,6 @@ public class DestroyController : MonoBehaviour {
     void Start() {
         if(healthMarker != null) {
             healthMarkerLength = healthMarker.GetChild(0).localScale.y;
-            healthMarkerInitialPos = healthMarker.GetChild(0).position.z;
         }
     }
 
