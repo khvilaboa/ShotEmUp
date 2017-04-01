@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    [Header("Gesture Controller")]
+    public GestureInputController gestureController;
 
     [Header("Movement")]
     public float speed;
@@ -36,9 +38,11 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate () {
         // Get movements from inputs
-        float horizontalMov = Input.GetAxis("Horizontal");
-        float verticalMov = Input.GetAxis("Vertical");
+        float horizontalMov = gestureController.getAxis("Horizontal");
+        float verticalMov = gestureController.getAxis("Vertical");
 
+        Debug.Log(gestureController.getHandPosition());
+        Debug.Log("FINGERS " + gestureController.getDetectedFingersNumber());
         // Set the new volocity
         Vector3 movementVector = new Vector3(horizontalMov, 0, verticalMov);
         body.velocity = movementVector * speed;

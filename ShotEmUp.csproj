@@ -85,54 +85,54 @@
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.Stitching">
-      <HintPath>Assets\HMC_x64\Emgu.CV.Stitching.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.GPU">
-      <HintPath>Assets\HMC_x64\Emgu.CV.GPU.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.UI">
-      <HintPath>Assets\HMC_x64\Emgu.CV.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.OCR">
-      <HintPath>Assets\HMC_x64\Emgu.CV.OCR.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2012">
-      <HintPath>Assets\HMC_x64\Emgu.CV.DebuggerVisualizers.VS2012.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing">
-      <HintPath>Assets\HMC_x64\System.Drawing.dll</HintPath>
+    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2008">
+      <HintPath>Assets\HMC_x64\Emgu.CV.DebuggerVisualizers.VS2008.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.DebuggerVisualizers.VS2010">
       <HintPath>Assets\HMC_x64\Emgu.CV.DebuggerVisualizers.VS2010.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.ML">
-      <HintPath>Assets\HMC_x64\Emgu.CV.ML.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.Util">
-      <HintPath>Assets\HMC_x64\Emgu.Util.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.OpenCL">
-      <HintPath>Assets\HMC_x64\Emgu.CV.OpenCL.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV">
-      <HintPath>Assets\HMC_x64\Emgu.CV.dll</HintPath>
-    </Reference>
-    <Reference Include="ZedGraph">
-      <HintPath>Assets\HMC_x64\ZedGraph.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2008">
-      <HintPath>Assets\HMC_x64\Emgu.CV.DebuggerVisualizers.VS2008.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.VideoStab">
-      <HintPath>Assets\HMC_x64\Emgu.CV.VideoStab.dll</HintPath>
+    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2012">
+      <HintPath>Assets\HMC_x64\Emgu.CV.DebuggerVisualizers.VS2012.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.DebuggerVisualizers.VS2013">
       <HintPath>Assets\HMC_x64\Emgu.CV.DebuggerVisualizers.VS2013.dll</HintPath>
     </Reference>
+    <Reference Include="Emgu.CV">
+      <HintPath>Assets\HMC_x64\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.GPU">
+      <HintPath>Assets\HMC_x64\Emgu.CV.GPU.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.ML">
+      <HintPath>Assets\HMC_x64\Emgu.CV.ML.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.OCR">
+      <HintPath>Assets\HMC_x64\Emgu.CV.OCR.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.OpenCL">
+      <HintPath>Assets\HMC_x64\Emgu.CV.OpenCL.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.Stitching">
+      <HintPath>Assets\HMC_x64\Emgu.CV.Stitching.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>Assets\HMC_x64\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.VideoStab">
+      <HintPath>Assets\HMC_x64\Emgu.CV.VideoStab.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util">
+      <HintPath>Assets\HMC_x64\Emgu.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>Assets\HMC_x64\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="ZedGraph">
+      <HintPath>Assets\HMC_x64\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\HMC_x64\Constants.cs" />
+    <Compile Include="Assets\HMC_x64\GestureInputController.cs" />
     <Compile Include="Assets\HMC_x64\GestureRecognition.cs" />
     <Compile Include="Assets\Scripts\AsteroidMovement.cs" />
     <Compile Include="Assets\Scripts\AutoDestruct.cs" />
@@ -149,7 +149,6 @@
     <Compile Include="Assets\Scripts\OndulantMovement.cs" />
     <Compile Include="Assets\Scripts\OrbitantMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\PlayerGestureController.cs" />
     <Compile Include="Assets\Scripts\ShotController.cs" />
     <Compile Include="Assets\Scripts\Utils.cs" />
   </ItemGroup>
