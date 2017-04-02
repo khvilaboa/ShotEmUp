@@ -38,11 +38,10 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate () {
         // Get movements from inputs
-        float horizontalMov = gestureController.getAxis("Horizontal");
-        float verticalMov = gestureController.getAxis("Vertical");
+        float horizontalMov = gestureController.GetAxis("Horizontal") ;
+        float verticalMov = gestureController.GetAxis("Vertical") ;
 
-        Debug.Log(gestureController.getHandPosition());
-        Debug.Log("FINGERS " + gestureController.getDetectedFingersNumber());
+        Debug.Log(gestureController.GetHandPosition());
         // Set the new volocity
         Vector3 movementVector = new Vector3(horizontalMov, 0, verticalMov);
         body.velocity = movementVector * speed;
