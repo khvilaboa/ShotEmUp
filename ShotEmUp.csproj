@@ -132,6 +132,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\HMC_x64\GestureCaptureImage.cs" />
     <Compile Include="Assets\HMC_x64\GestureInputController.cs" />
     <Compile Include="Assets\HMC_x64\GestureRecognition.cs" />
     <Compile Include="Assets\Scripts\AsteroidMovement.cs" />
