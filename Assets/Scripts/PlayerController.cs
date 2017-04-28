@@ -37,9 +37,20 @@ public class PlayerController : MonoBehaviour {
     }
 
     void FixedUpdate () {
+        float horizontalMov;
+        float verticalMov;
         // Get movements from inputs
-        float horizontalMov = gestureController.GetAxis("Horizontal") ;
-        float verticalMov = gestureController.GetAxis("Vertical") ;
+      
+        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+        {
+            horizontalMov = Input.GetAxis("Horizontal");
+            verticalMov = Input.GetAxis("Vertical");
+        }
+        else
+        {
+            horizontalMov = gestureController.GetAxis("Horizontal");
+            verticalMov = gestureController.GetAxis("Vertical");
+        }
 
         Debug.Log(gestureController.GetHandPosition());
         // Set the new volocity
