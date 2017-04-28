@@ -2,9 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+
+
+public class PlayerController : MonoBehaviour
+{
+    public enum InputMode
+    {
+        OnlyKeyboard,
+        OnlyGesture,
+        KeyboardAndGesture
+    };
+
     [Header("Gesture Controller")]
     public GestureInputController gestureController;
+
+    public InputMode inputMode;
 
     [Header("Movement")]
     public float speed;
@@ -16,41 +28,58 @@ public class PlayerController : MonoBehaviour {
     public ShotController shotController;
     public float fireRate;  // In seconds
     private float nextFire;
-    
 
-    void Awake () {
+
+    void Awake()
+    {
         body = GetComponent<Rigidbody>();
         nextFire = 0;
-	}
+    }
 
-    void Start() {
+    void Start()
+    {
         UpdateAreaLimits();
     }
 
     void Update()
     {
-        if(Input.GetButton("Fire1") && Time.time >= nextFire)
+        if (Input.GetButton("Fire1") && Time.time >= nextFire)
         {
             shotController.Fire();
             nextFire = Time.time + fireRate;
         }
     }
 
-    void FixedUpdate () {
-        float horizontalMov;
-        float verticalMov;
+    void FixedUpdate()
+    {
+        float horizontalMov = 0;
+        float verticalMov = 0;
         // Get movements from inputs
-      
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+
+        if (inputMode == InputMode.OnlyKeyboard)
         {
             horizontalMov = Input.GetAxis("Horizontal");
             verticalMov = Input.GetAxis("Vertical");
         }
-        else
+        else if (inputMode == InputMode.OnlyGesture)
         {
             horizontalMov = gestureController.GetAxis("Horizontal");
             verticalMov = gestureController.GetAxis("Vertical");
         }
+        else if (inputMode == InputMode.KeyboardAndGesture)
+        {
+            if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+            {
+                horizontalMov = Input.GetAxis("Horizontal");
+                verticalMov = Input.GetAxis("Vertical");
+            }
+            else
+            {
+                horizontalMov = gestureController.GetAxis("Horizontal");
+                verticalMov = gestureController.GetAxis("Vertical");
+            }
+        }
+
 
         Debug.Log(gestureController.GetHandPosition());
         // Set the new volocity
@@ -68,7 +97,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Limits the area in which the player can move
-    void UpdateAreaLimits() {
+    void UpdateAreaLimits()
+    {
         Vector2 viewSize = Utils.GetViewDimensions();
         minX = -viewSize.x / 2 + 8;
         maxX = viewSize.x / 2 - 8;
