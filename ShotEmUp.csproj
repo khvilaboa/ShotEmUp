@@ -130,6 +130,9 @@
     <Reference Include="ZedGraph">
       <HintPath>Assets\HMC_x64\ZedGraph.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers">
+      <HintPath>Assets\HMC_x64\Microsoft.VisualStudio.DebuggerVisualizers.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\HMC_x64\GestureCaptureImage.cs" />
