@@ -41,11 +41,18 @@ public class GameController : MonoBehaviour
 
     [Header("Asteroids")]
     public GameObject[] asteroids;
-    public Vector3 asteriodRange;
+    public Vector3 asteroidRange;
     public int minAsteroidsPerWave;
     public int maxAsteroidsPerWave;
     public float asteroidDelay;
-    public float timeBetweenWaves;
+
+    [Header("Astras")]
+    public GameObject[] astras;
+    public int minAstrasPerWave;
+    public int maxAstrasPerWave;
+    public float astraDelay;
+    public float startZ, stepZ;
+    public int numStepsZ;
 
     [Header("Enemies")]
     public GameObject[] warships;
@@ -63,6 +70,7 @@ public class GameController : MonoBehaviour
 
     [Header("Other")]
     public GameObject player;
+    public float timeBetweenWaves;
 
     private int score;
     private bool gameOver;
@@ -112,7 +120,7 @@ public class GameController : MonoBehaviour
     void UpdateAsteroidLimit()
     {
         Vector2 dims = Utils.GetViewDimensions();
-        asteriodRange.x = dims.x / 2 - 4;
+        asteroidRange.x = dims.x / 2 - 4;
     }
 
     
@@ -168,11 +176,11 @@ public class GameController : MonoBehaviour
     public void LaunchWave() {
         int rnd = Random.Range(1, 10);
         if(rnd < 8) {
-            StartCoroutine(GenerateAsteroids());
+            StartCoroutine(GenerateHorizontalAstras());
         } else {
             enemiesLeft = 1;
-            float xPosition = Random.Range(-asteriodRange.x, asteriodRange.x);
-            Vector3 position = new Vector3(xPosition, asteriodRange.y, 100);
+            float xPosition = Random.Range(-asteroidRange.x, asteroidRange.x);
+            Vector3 position = new Vector3(xPosition, asteroidRange.y, 100);
             GameObject enemy = warships[Random.Range(0,warships.Length)];
             GameObject enemyInst = Instantiate(enemy, position, Quaternion.identity);
             if(enemyInst.name.StartsWith(ENEMY_WARSHIP_GREY)) {
@@ -184,15 +192,44 @@ public class GameController : MonoBehaviour
     }
 
     // Coroutine to generate asteroid waves
-    IEnumerator GenerateAsteroids() {
+    IEnumerator GenerateAsteroids()
+    {
         int numAsteroids = Random.Range(minAsteroidsPerWave, maxAsteroidsPerWave);
         enemiesLeft += numAsteroids;
 
-        for (int i = 0; i < numAsteroids; i++) {
-            float xPosition = Random.Range(-asteriodRange.x, asteriodRange.x);
-            Vector3 asteroidPosition = new Vector3(xPosition, asteriodRange.y, asteriodRange.z);
+        for (int i = 0; i < numAsteroids; i++)
+        {
+            float xPosition = Random.Range(-asteroidRange.x, asteroidRange.x);
+            Vector3 asteroidPosition = new Vector3(xPosition, asteroidRange.y, asteroidRange.z);
             Instantiate(asteroids[Random.Range(0, asteroids.Length)], asteroidPosition, Quaternion.identity);
             yield return new WaitForSeconds(asteroidDelay);
+        }
+    }
+
+    // Coroutine to generate astra ships waves
+    IEnumerator GenerateHorizontalAstras()
+    {
+        int numAstras = Random.Range(minAstrasPerWave, maxAstrasPerWave);
+        enemiesLeft += numAstras * numStepsZ;
+        GameObject astra = astras[Random.Range(0, astras.Length)];
+        float xPosition, xVel = astra.GetComponent<LinearMovement>().direction.x;
+
+        for (int i = 0; i < numAstras; i++)
+        {
+            float zOff = startZ;
+            float yStepCount = 0;
+
+            while(yStepCount < numStepsZ)
+            {
+                xPosition = asteroidRange.x * (yStepCount % 2 == 0?-1:1);
+                astra.GetComponent<LinearMovement>().direction.x = xVel * (yStepCount % 2 == 0 ? 1 : -1);
+                Vector3 astraPosition = new Vector3(xPosition, asteroidRange.y, zOff);
+                Instantiate(astra, astraPosition, Quaternion.Euler(new Vector3(0, 90, 0)));
+                yStepCount += 1;
+                zOff += stepZ;
+            }
+
+            yield return new WaitForSeconds(astraDelay);
         }
     }
 
