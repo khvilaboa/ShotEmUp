@@ -212,7 +212,8 @@ public class GameController : MonoBehaviour
         int numAstras = Random.Range(minAstrasPerWave, maxAstrasPerWave);
         enemiesLeft += numAstras * numStepsZ;
         GameObject astra = astras[Random.Range(0, astras.Length)];
-        float xPosition, xVel = astra.GetComponent<LinearMovement>().direction.x;
+        float xPosition, xVel = Mathf.Abs(astra.GetComponent<LinearMovement>().direction.x);
+        int side = Random.Range(0, 2)==0?-1:1;
 
         for (int i = 0; i < numAstras; i++)
         {
@@ -221,8 +222,8 @@ public class GameController : MonoBehaviour
 
             while(yStepCount < numStepsZ)
             {
-                xPosition = asteroidRange.x * (yStepCount % 2 == 0?-1:1);
-                astra.GetComponent<LinearMovement>().direction.x = xVel * (yStepCount % 2 == 0 ? 1 : -1);
+                xPosition = asteroidRange.x * (yStepCount % 2 == 0? -side : side);
+                astra.GetComponent<LinearMovement>().direction.x = xVel * (yStepCount % 2 == 0 ? side : -side);
                 Vector3 astraPosition = new Vector3(xPosition, asteroidRange.y, zOff);
                 Instantiate(astra, astraPosition, Quaternion.Euler(new Vector3(0, 90, 0)));
                 yStepCount += 1;
