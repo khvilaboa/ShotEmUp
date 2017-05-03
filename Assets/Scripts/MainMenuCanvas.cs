@@ -24,7 +24,8 @@ public class MainMenuCanvas : MonoBehaviour
 
     void TaskOnOptionsButtonClick()
     {
-        Debug.Log("You have option clicked the button!");
+        GameObject.Find("MenuCanvas").GetComponent<Canvas>().enabled = false;
+        GameObject.Find("OptionCanvas").GetComponent<Canvas>().enabled = true;
     }
 
     void TaskOnExitButtonClick()
