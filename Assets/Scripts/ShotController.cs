@@ -13,17 +13,42 @@ public class ShotController : MonoBehaviour {
     void Start () {
         nextTurret = 0;
 	}
-	
-	public void Fire () {
-        if (turrets.childCount > 0) {
+
+    public void Fire()
+    {
+        if (turrets.childCount > 0)
+        {
             if (alternateTurrets)
             {
                 Instantiate(shot, turrets.GetChild(nextTurret).position, shot.transform.rotation);
                 nextTurret = (nextTurret + 1) % turrets.childCount;
-            } else {
+            }
+            else {
                 for (int i = 0; i < turrets.childCount; i++)
                 {
                     Instantiate(shot, turrets.GetChild(i).position, shot.transform.rotation);
+                }
+            }
+        }
+    }
+
+    public void FireTarget(GameObject go)
+    {
+        if (turrets.childCount > 0)
+        {
+            if (alternateTurrets)
+            {
+                GameObject clone = Instantiate(shot, turrets.GetChild(nextTurret).position, shot.transform.rotation);
+                clone.GetComponent<Rigidbody>().velocity = go.transform.position - turrets.GetChild(nextTurret).position;
+                clone.transform.LookAt(go.transform);
+                nextTurret = (nextTurret + 1) % turrets.childCount;
+            }
+            else {
+                for (int i = 0; i < turrets.childCount; i++)
+                {
+                    GameObject clone = Instantiate(shot, turrets.GetChild(i).position, shot.transform.rotation);
+                    clone.GetComponent<Rigidbody>().velocity = go.transform.position - turrets.GetChild(i).position;
+                    clone.transform.LookAt(go.transform);
                 }
             }
         }

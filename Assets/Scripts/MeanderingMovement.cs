@@ -6,15 +6,21 @@ public class MeanderingMovement : MonoBehaviour {
 
     private Rigidbody body;
     private float minX, maxX;
-    public float speed = 40;
-    public float tiltAngle = 10;  // Max tilt
-    public float zLimit;
-    private float currentTilt = 0;
-    private bool rightDirection = true;
+    public float maxSpeed = 40;
+    public float secondsPerCicle = 2;
+    public float stopSeconds = 1;
+    private float currSpeed = 40;
+    private float step;
+    private bool speedingUp = false;
+    //public float tiltAngle = 10;  // Max tilt
+    //public float zLimit;
+    //private float currentTilt = 0;
+    //private bool rightDirection = true;
 
     void Awake()
     {
         body = GetComponent<Rigidbody>();
+        //step = maxSpeed / 
     }
 
 

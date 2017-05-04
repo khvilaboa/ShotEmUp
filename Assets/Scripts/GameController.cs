@@ -21,6 +21,10 @@ public class GameController : MonoBehaviour
     private const int ENEMY_WARSHIP_GREY_SCORE = 50;
     private const int ENEMY_WARSHIP_GREY_DAMAGE = 50;
 
+    public const string ENEMY_WARSHIP_RED = "warshipRed";
+    private const int ENEMY_WARSHIP_RED_SCORE = 50;
+    private const int ENEMY_WARSHIP_RED_DAMAGE = 50;
+
     public const string SHOT = "shot";
     private const int SHOT_DAMAGE = 10;
 
@@ -175,7 +179,9 @@ public class GameController : MonoBehaviour
 
     public void LaunchWave() {
         int rnd = Random.Range(1, 10);
-        if(rnd < 8) {
+        if (rnd < 4) {
+            StartCoroutine(GenerateAsteroids());
+        } else if (rnd < 6) {
             StartCoroutine(GenerateHorizontalAstras());
         } else {
             enemiesLeft = 1;
@@ -186,6 +192,11 @@ public class GameController : MonoBehaviour
             if(enemyInst.name.StartsWith(ENEMY_WARSHIP_GREY)) {
                 enemyInst.GetComponent<FollowMovement>().target = player;
                 enemyInst.GetComponent<ShotController>().shot.GetComponent<FollowMovement>().target = player;
+            }
+            else if (enemyInst.name.StartsWith(ENEMY_WARSHIP_RED))
+            {
+                enemyInst.GetComponent<FollowMovement>().target = player;
+                enemyInst.GetComponent<RedWarshipController>().target = player;
             }
         }
         
