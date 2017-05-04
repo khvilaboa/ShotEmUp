@@ -11,3 +11,7 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
+Library/assetDatabase3
+Library/CurrentLayout.dwlt
+Library/shadercompiler-UnityShaderCompiler.exe0.log
+Library/ScriptAssemblies/Assembly-CSharp.dll.mdb

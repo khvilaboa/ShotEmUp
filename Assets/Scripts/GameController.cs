@@ -261,6 +261,7 @@ public class GameController : MonoBehaviour
     public void spawnRandomItem(Vector3 position) {
         GameObject item = Instantiate(oneTimeItems[Random.Range(0, oneTimeItems.Length)], position, Quaternion.identity);
         item.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, itemAngularVelocity ,0);
+        item.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -10);
     }
 
     public void activateItem(Collider coll) {
