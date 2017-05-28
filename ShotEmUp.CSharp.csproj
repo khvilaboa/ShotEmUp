@@ -134,12 +134,14 @@
     <Compile Include="Assets\Scripts\DestroyController.cs" />
     <Compile Include="Assets\Scripts\FollowMovement.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\GameOptions.cs" />
     <Compile Include="Assets\Scripts\GreyWarshipController.cs" />
     <Compile Include="Assets\Scripts\InconstantMovement.cs" />
     <Compile Include="Assets\Scripts\LinearMovement.cs" />
     <Compile Include="Assets\Scripts\MainMenuCanvas.cs" />
     <Compile Include="Assets\Scripts\MeanderingMovement.cs" />
     <Compile Include="Assets\Scripts\OndulantMovement.cs" />
+    <Compile Include="Assets\Scripts\OptionMenuCanvas.cs" />
     <Compile Include="Assets\Scripts\OrbitantMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\RedWarshipController.cs" />
