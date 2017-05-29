@@ -96,6 +96,15 @@ public class GameController : MonoBehaviour
         txtGameOver.gameObject.SetActive(false);
         txtRestart.gameObject.SetActive(false);
 
+        if (GameOptions.isVolumeEnabled == false)
+        {
+            GetComponent<AudioSource>().enabled = false;
+        }
+        else
+        {
+            GetComponent<AudioSource>().enabled = true;
+        }
+
         // Start spawning asteroid waves
         LaunchWave();
     }

@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
 public class GameOptions : MonoBehaviour {
-    static public bool isVolumeEnabled;
-    static public bool areSoundEffectsEnabled;
+    static public bool isVolumeEnabled = true;
+    static public bool areSoundEffectsEnabled = true;
     public enum InputMode
     {
         OnlyKeyboard,
         OnlyGesture,
         KeyboardAndGesture
     };
-    static public InputMode inputModeSelected;
+    static public InputMode inputModeSelected = InputMode.OnlyGesture;
 
     public bool IsVolumeEnabled
     {

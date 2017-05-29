@@ -38,6 +38,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         UpdateAreaLimits();
+        if (GameOptions.inputModeSelected == GameOptions.InputMode.OnlyGesture)
+        {
+            inputMode = InputMode.OnlyGesture;
+        }
+        else
+        {
+            inputMode = InputMode.OnlyKeyboard;
+        }
     }
 
     void Update()
