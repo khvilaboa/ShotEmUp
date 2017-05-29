@@ -12,7 +12,33 @@ public class ShotController : MonoBehaviour {
 
     void Start () {
         nextTurret = 0;
-	}
+    }
+
+    void LateUpdate()
+    {
+        if (GameOptions.areSoundEffectsEnabled == false)
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("EnemyShot"))
+            {
+                go.GetComponent<AudioSource>().enabled = false;
+            }
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("PlayerShot"))
+            {
+                go.GetComponent<AudioSource>().enabled = false;
+            }
+        }
+        else
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("EnemyShot"))
+            {
+                go.GetComponent<AudioSource>().enabled = true;
+            }
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("PlayerShot"))
+            {
+                go.GetComponent<AudioSource>().enabled = true;
+            }
+        }
+    }
 
     public void Fire()
     {
