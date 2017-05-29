@@ -41,6 +41,8 @@ public class GameController : MonoBehaviour
     public const int ITEM_BUDDY_HEALTH = 25;
     public GameObject buddyReference;
 
+    private int round = 1;
+
     //private enum WaveType { Asteroid, Warship };
 
     [Header("Asteroids")]
@@ -115,6 +117,7 @@ public class GameController : MonoBehaviour
         {
             txtGameOver.gameObject.SetActive(false);
             txtRestart.gameObject.SetActive(false);
+            Destroy(player.GetComponent<GestureInputController>());
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
@@ -182,16 +185,19 @@ public class GameController : MonoBehaviour
         
 
         if (enemiesLeft == 0 && !gameOver) {
+            round += 1;
             LaunchWave();
         }
     }
 
     public void LaunchWave() {
-        int rnd = Random.Range(1, 10);
-        if (rnd < 4) {
-            StartCoroutine(GenerateAsteroids());
-        } else if (rnd < 6) {
-            StartCoroutine(GenerateHorizontalAstras());
+        if(round % 3 != 0) { 
+            int rnd = Random.Range(1, 6);
+            if (rnd < 4) {
+                StartCoroutine(GenerateAsteroids());
+            } else {
+                StartCoroutine(GenerateHorizontalAstras());
+            }
         } else {
             enemiesLeft = 1;
             float xPosition = Random.Range(-asteroidRange.x, asteroidRange.x);
