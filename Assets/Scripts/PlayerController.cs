@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
-        if (Time.time >= nextFire && ((inputMode == InputMode.OnlyKeyboard && Input.GetButton("Fire1"))) || (inputMode != InputMode.OnlyKeyboard && gestureController.GetButton("Fire1")))
+        if (Time.time >= nextFire && ((inputMode == InputMode.OnlyKeyboard && Input.GetButton("Fire1")) || (inputMode != InputMode.OnlyKeyboard && gestureController.GetButton("Fire1"))))
         {
             shotController.Fire();
             nextFire = Time.time + fireRate;
