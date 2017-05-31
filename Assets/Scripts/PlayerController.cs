@@ -50,7 +50,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && Time.time >= nextFire)
+        
+        if (Time.time >= nextFire && ((inputMode == InputMode.OnlyKeyboard && Input.GetButton("Fire1"))) || (inputMode != InputMode.OnlyKeyboard && gestureController.GetButton("Fire1")))
         {
             shotController.Fire();
             nextFire = Time.time + fireRate;
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        Debug.Log(gestureController.GetHandPosition());
+        //Debug.Log(gestureController.GetHandPosition());
         // Set the new volocity
         Vector3 movementVector = new Vector3(horizontalMov, 0, verticalMov);
         body.velocity = movementVector * speed;

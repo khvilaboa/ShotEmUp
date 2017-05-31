@@ -83,18 +83,19 @@ public class GestureInputController : MonoBehaviour
 
     public float GetAxis(String axis)
     {
+        PointF normPos = GetNormalizedHandPosition();
         switch (axis)
         {
             case "Horizontal":
-                return GetNormalizedHandPosition().X;
+                return normPos.X;
             case "Vertical":
-                return GetNormalizedHandPosition().Y;
+                return normPos.Y;
             case "RelativeHorizontal":
-                if (GetNormalizedHandPosition().X > 0.5)
+                if (normPos.X > 0.5)
                 {
                     return 1;
                 }
-                else if (GetNormalizedHandPosition().X < 0.5)
+                else if (normPos.X < 0.5)
                 {
                     return -1;
                 }
@@ -103,11 +104,11 @@ public class GestureInputController : MonoBehaviour
                     return 0;
                 }
             case "RelativeVertical":
-                if (GetNormalizedHandPosition().Y > 0.5)
+                if (normPos.Y > 0.5)
                 {
                     return 1;
                 }
-                else if (GetNormalizedHandPosition().Y < 0.5)
+                else if (normPos.Y < 0.5)
                 {
                     return -1;
                 }
@@ -118,6 +119,11 @@ public class GestureInputController : MonoBehaviour
             default:
                 return 0;
         }
+    }
+
+    public bool GetButton(String axis)
+    {
+        return GetDetectedFingersNumber() > 1;
     }
 
     public Image<Bgr, byte> GetCapture()
