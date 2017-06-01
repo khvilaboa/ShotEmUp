@@ -64,6 +64,10 @@ public class DestroyController : MonoBehaviour {
     public void Destroy()
     {
         destroyed = true;
+        if (GameOptions.areSoundEffectsEnabled == false)
+        {
+            explosion.GetComponent<AudioSource>().enabled = false;
+        }
         if (explosion != null) Instantiate(explosion, transform.position, transform.rotation);
 
         if (tag == "Player" && GetComponent<PlayerController>() != null)
