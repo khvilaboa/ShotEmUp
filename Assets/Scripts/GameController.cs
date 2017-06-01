@@ -13,16 +13,19 @@ public class GameController : MonoBehaviour
     private const int ENEMY_ASTEROID_SCORE = 10;
     private const int ENEMY_ASTEROID_DAMAGE = 20;
 
+    public const string ENEMY_ASTRA = "astra";
+    private const int ENEMY_ASTRA_SCORE = 15;
+
     public const string ENEMY_WARSHIP_BLACK = "warshipBlack";
-    private const int ENEMY_WARSHIP_BLACK_SCORE = 50;
+    private const int ENEMY_WARSHIP_BLACK_SCORE = 100;
     private const int ENEMY_WARSHIP_BLACK_DAMAGE = 50;
 
     public const string ENEMY_WARSHIP_GREY = "warshipGrey";
-    private const int ENEMY_WARSHIP_GREY_SCORE = 50;
+    private const int ENEMY_WARSHIP_GREY_SCORE = 100;
     private const int ENEMY_WARSHIP_GREY_DAMAGE = 50;
 
     public const string ENEMY_WARSHIP_RED = "warshipRed";
-    private const int ENEMY_WARSHIP_RED_SCORE = 50;
+    private const int ENEMY_WARSHIP_RED_SCORE = 100;
     private const int ENEMY_WARSHIP_RED_DAMAGE = 50;
 
     public const string SHOT = "shot";
@@ -87,6 +90,8 @@ public class GameController : MonoBehaviour
         score = 0;
         gameOver = false;
         buddyReference = null;
+
+        
     }
 
     void Start()
@@ -107,6 +112,11 @@ public class GameController : MonoBehaviour
             GetComponent<AudioSource>().enabled = true;
         }
 
+        if (GameOptions.inputModeSelected == GameOptions.InputMode.OnlyGesture)
+        {
+            player.GetComponent<GestureInputController>().enabled = true;
+        }
+
         // Start spawning asteroid waves
         LaunchWave();
     }
@@ -117,7 +127,7 @@ public class GameController : MonoBehaviour
         {
             txtGameOver.gameObject.SetActive(false);
             txtRestart.gameObject.SetActive(false);
-            Destroy(player.GetComponent<GestureInputController>());
+            //Destroy(player.GetComponent<GestureInputController>());
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
@@ -174,11 +184,15 @@ public class GameController : MonoBehaviour
                 AddScore(ENEMY_WARSHIP_BLACK_SCORE);
             else if (enemyClass.StartsWith(ENEMY_WARSHIP_GREY))
                 AddScore(ENEMY_WARSHIP_GREY_SCORE);
+            else if (enemyClass.StartsWith(ENEMY_WARSHIP_RED))
+                AddScore(ENEMY_WARSHIP_RED_SCORE);
             else {  // Normal enemies (with probability of dropping items)
                 if (enemyClass.StartsWith(ENEMY_ASTEROID))
                     AddScore(ENEMY_ASTEROID_SCORE);
+                else if (enemyClass.StartsWith(ENEMY_ASTRA))
+                    AddScore(ENEMY_ASTRA_SCORE);
 
-                if(Random.Range(0, 100) < itemSpawnProbability * 100)
+                if (Random.Range(0, 100) < itemSpawnProbability * 100)
                     spawnRandomItem(enemy.transform.position);
             }
         }
@@ -187,6 +201,7 @@ public class GameController : MonoBehaviour
         if (enemiesLeft == 0 && !gameOver) {
             round += 1;
             LaunchWave();
+            Debug.Log("ROUND " + round);
         }
     }
 
@@ -221,7 +236,7 @@ public class GameController : MonoBehaviour
     IEnumerator GenerateAsteroids()
     {
         int numAsteroids = Random.Range(minAsteroidsPerWave, maxAsteroidsPerWave);
-        enemiesLeft += numAsteroids;
+        enemiesLeft = numAsteroids;
 
         for (int i = 0; i < numAsteroids; i++)
         {
@@ -236,7 +251,7 @@ public class GameController : MonoBehaviour
     IEnumerator GenerateHorizontalAstras()
     {
         int numAstras = Random.Range(minAstrasPerWave, maxAstrasPerWave);
-        enemiesLeft += numAstras * numStepsZ;
+        enemiesLeft = numAstras * numStepsZ;
         GameObject astra = astras[Random.Range(0, astras.Length)];
         float xPosition, xVel = Mathf.Abs(astra.GetComponent<LinearMovement>().direction.x);
         int side = Random.Range(0, 2)==0?-1:1;
