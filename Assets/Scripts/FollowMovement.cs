@@ -21,7 +21,7 @@ public class FollowMovement : MonoBehaviour {
         if(zLimited) body.velocity = new Vector3(body.velocity.x, body.velocity.y, -maxSpeed);
     }
 
-    void Update () {
+    void FixedUpdate () {
         if (zLimited && body.position.z <= zLimit) body.velocity = new Vector3(body.velocity.x, body.velocity.y, 0);
 
         if(target != null) {

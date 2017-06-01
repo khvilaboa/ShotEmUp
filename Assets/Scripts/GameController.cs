@@ -319,6 +319,7 @@ public class GameController : MonoBehaviour
             buddyReference = Instantiate(player, player.transform.position + (new Vector3(0,0,50)), Quaternion.identity);
             buddyReference.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             Destroy(buddyReference.GetComponent<PlayerController>());
+            Destroy(buddyReference.GetComponent<GestureInputController>());
             BuddyController buddyController = buddyReference.AddComponent<BuddyController>();
 
             ShotController shotController = buddyReference.GetComponent<ShotController>();
